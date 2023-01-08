@@ -71,14 +71,14 @@ public class FileManager {
                 while ((symbol = reader.read()) != -1) {
                     text.append((char)symbol);
                 }
-                text.append((char)('\n'));
+                text.append(('\n'));
             } catch (IOException e) {
                 System.out.println("Не получилось прочитать содержимое файла\n");
             }
         }
 
         try(FileWriter writer = new FileWriter("output.txt")) {
-            writer.write(String.valueOf(text.toString()));
+            writer.write(text.toString());
         }
         catch (IOException e){
             System.out.println("Не получилось записать содержимое файлов в другой файл\n");
