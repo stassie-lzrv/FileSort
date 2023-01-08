@@ -29,7 +29,10 @@ public class Main {
     }
 
 
-    //добавить проверку на корректность
+    /**
+     * Ввод корневой папки с клавиатуры и проверка на ее существование
+     * @return адрес корневой папки
+     */
     public static String inputRootDir(){
         System.out.println("Введите полный адрес корневой папки: ");
         Scanner in = new Scanner(System.in);
