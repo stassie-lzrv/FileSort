@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 
-public class FileStruct {
+/*public class FileStruct {
     private final String fileName;
     private final ArrayList<String> text = new ArrayList<>();
 
@@ -39,4 +39,4 @@ public class FileStruct {
         }
     }
 
-}
+}*/
