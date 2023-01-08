@@ -16,7 +16,7 @@ public class FileManager {
     }
 
     /**
-     *
+     * Чтение и добавление файлов и зависимостей в граф
      */
     private void getFiles(String directory) {
         File dir = new File(directory); //path указывает на директорию
@@ -34,7 +34,7 @@ public class FileManager {
 
 
     /**
-     *
+     * Установка зависимостей
      * @param file название файла
      */
     private void setRelations(File file) {
@@ -55,6 +55,10 @@ public class FileManager {
     }
 
 
+    /**
+     * Проверка на существование файла
+     * @return файл существует
+     */
     public boolean filesAreCorrect() {
         for (String filePath : fileGraph.adjList.keySet()) {
             File file = new File(filePath);
@@ -65,14 +69,24 @@ public class FileManager {
         return true;
     }
 
+    /**
+     * Проверка на правильность зависимостей
+     * @return зависимости корректны
+     */
     public ArrayList<String> relationsAreCorrect() {
         return fileGraph.detectCycle();
     }
 
+    /**
+     * Сортировка графа
+     */
     public void sort() {
         fileGraph.sortFiles();
     }
 
+    /**
+     * Конкатенация файлов
+     */
     public void print() {
         for (String filePath : fileGraph.sorted) {
             System.out.println(filePath.substring(rootDirectory.length()+1));

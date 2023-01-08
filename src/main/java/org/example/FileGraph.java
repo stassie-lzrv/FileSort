@@ -12,16 +12,26 @@ public class FileGraph {
     }
 
 
-    // метод для добавления вершины
+    /**
+     * Добавление вершины
+     * @param filePath Путь к файлу
+     */
     public void addVertex(String filePath) {
         adjList.putIfAbsent(filePath, new ArrayList<>());
     }
 
-    // метод для добавления зависимости(грани)
+    /**
+     * Добавление грани
+     * @param parentFile Родительский путь
+     * @param file Зависимый путь
+     */
     public void addEdge(String parentFile, String file) {
         adjList.get(parentFile).add(file);
     }
 
+    /**
+     * Сортировка файлов всего графа
+     */
     public void sortFiles() {
         ArrayList<String> visited = new ArrayList<>();
         for (String key : adjList.keySet()) {
@@ -32,6 +42,11 @@ public class FileGraph {
 
     }
 
+    /**
+     * Рекурсивный метод сортировки
+     * @param key Имя файла
+     * @param visited Список посещенных файлов
+     */
     public void sortFile(String key, ArrayList<String> visited) {
         if (visited.contains(key)) {
             return;
@@ -45,6 +60,10 @@ public class FileGraph {
         sorted.add(key);
     }
 
+    /**
+     * Проверка всего графа на циклы
+     * @return Список зацикливающихся файлов
+     */
     public ArrayList<String> detectCycle() {
         for (String key : adjList.keySet()) {
             ArrayList<String> visited = new ArrayList<>();
@@ -55,6 +74,12 @@ public class FileGraph {
         return null;
     }
 
+    /**
+     * Рекурсивная проверка на цикл
+     * @param key Название файла
+     * @param visited Список посещенных файлов
+     * @return Список посещенных файлов
+     */
     public ArrayList<String> detectCycle(String key, ArrayList<String> visited) {
         if (visited.contains(key)) {
             return visited;
