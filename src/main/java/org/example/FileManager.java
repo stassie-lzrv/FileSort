@@ -11,20 +11,32 @@ public class FileManager {
 
     FileManager(String rootDirectory) {
         this.rootDirectory = rootDirectory;
-        getFiles();
+        getFiles(rootDirectory);
 
     }
 
-    private void getFiles() {
-        File dir = new File(rootDirectory); //path указывает на директорию
+    /**
+     *
+     */
+    private void getFiles(String directory) {
+        File dir = new File(directory); //path указывает на директорию
         for (File file : Objects.requireNonNull(dir.listFiles())) {
             if (file.isFile()) {
                 fileGraph.addVertex(file.getAbsolutePath());
                 setRelations(file);
             }
+            else if(file.isDirectory()){
+                getFiles(file.getAbsolutePath());
+            }
         }
     }
 
+
+
+    /**
+     *
+     * @param file название файла
+     */
     private void setRelations(File file) {
         try {
             FileReader fr = new FileReader(file);
@@ -41,6 +53,7 @@ public class FileManager {
             e.printStackTrace();
         }
     }
+
 
     public boolean filesAreCorrect() {
         for (String filePath : fileGraph.adjList.keySet()) {
@@ -69,10 +82,11 @@ public class FileManager {
             try (FileReader reader = new FileReader(filePath)) {
                 int symbol;
                 while ((symbol = reader.read()) != -1) {
-                    text.append((char)symbol);
+                        text.append((char)symbol);
                 }
                 text.append(('\n'));
             } catch (IOException e) {
+
                 System.out.println("Не получилось прочитать содержимое файла\n");
             }
         }
